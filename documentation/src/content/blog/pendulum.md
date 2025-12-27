@@ -29,7 +29,7 @@ In our simulation, we approximate this using Euler integration:
 2. Update angular velocity by adding the acceleration.
 3. Update the angle by adding the velocity.
 
-<div id="simulation-container" style="display: flex; justify-content: center; margin: 2rem 0;"></div>
+<div id="simulation-container" style="display: flex; flex-direction: column; align-items: center; margin: 2rem 0;"></div>
 
 <script is:inline src="/libraries/p5.min.js"></script>
 <script is:inline src="/libraries/p5.sound.min.js"></script>
