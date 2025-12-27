@@ -11,7 +11,7 @@ let gravity = 1;
 let mu;
 
 function setup(){
-  createCanvas(600, 600);
+  createCanvas(1200, 600);
   origin = createVector(300, 0);
   angle = PI/4;
   mu = 0.01;
@@ -23,6 +23,9 @@ function setup(){
   //todo: itt osszeakad a szog allitas a hossz allitassal
 
 }
+
+
+let angleHistory = [];
 
 function draw(){
   background(0);
@@ -37,10 +40,12 @@ function draw(){
   jozsi.y = len * cos(angle) + origin.y;
 
   if (mouseIsPressed) {
-    angle = atan2(mouseX - origin.x, mouseY - origin.y);
-    angleV = 0;
-    jozsi.x = len * sin(angle) + origin.x;
-    jozsi.y = len * cos(angle) + origin.y;
+    if (mouseX < 600 && mouseY < 600) { // Only interact with pendulum on the left upper side
+      angle = atan2(mouseX - origin.x, mouseY - origin.y);
+      angleV = 0;
+      jozsi.x = len * sin(angle) + origin.x;
+      jozsi.y = len * cos(angle) + origin.y;
+    }
   }
 
   stroke(255);
@@ -66,5 +71,42 @@ function draw(){
 
   line(jozsi.x, jozsi.y, jozsi.x + accelerationX * 100, jozsi.y + accelerationY * 100);
 
+  // Graph logic
+  angleHistory.push(angle);
+  // Limit history to the width of the graph area (approx 550 pixels)
+  if (angleHistory.length > 500) {
+    angleHistory.shift();
+  }
 
+  // Draw Graph Background
+  noStroke();
+  fill(20);
+  rect(600, 0, 600, 600);
+
+  // Draw Axes
+  stroke(255);
+  strokeWeight(2);
+  line(650, 300, 1150, 300); // X axis (Time)
+  line(650, 50, 650, 550);   // Y axis (Angle)
+
+  // Label Axes
+  noStroke();
+  fill(255);
+  textSize(16);
+  text("Time", 1100, 320);
+  text("Angle", 600, 50);
+
+  // Draw Graph
+  noFill();
+  stroke(0, 255, 0); // Green color for angle
+  strokeWeight(2);
+  beginShape();
+  for (let i = 0; i < angleHistory.length; i++) {
+    // Map i to x position
+    let x = 650 + i;
+    // Map angle to y position (center at 300, scale factor e.g., 50 pixels per radian)
+    let y = 300 - angleHistory[i] * 50; 
+    vertex(x, y);
+  }
+  endShape();
 }
