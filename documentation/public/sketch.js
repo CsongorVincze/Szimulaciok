@@ -10,7 +10,11 @@ let gravity = 1;
 let mu;
 
 function setup(){
-  createCanvas(1200, 600);
+  let canvas = createCanvas(1200, 600);
+  // Check if the container exists (it might not on other pages)
+  if (document.getElementById('simulation-container')) {
+    canvas.parent('simulation-container');
+  }
   origin = createVector(300, 0);
   angle = PI/4;
   mu = 0.01;
