@@ -5,10 +5,37 @@ pubDate: 'Dec 27, 2025'
 heroImage: '../../assets/blog-placeholder-3.jpg'
 ---
 
+Babi néni tsőőőő!
+Ez a cikk arra hivatott, hogy tanulj valamit a fizikában előkerülő rezgésekről. Az egészet fokozatosan fogjuk felépíteni A legegyszerűbb példákkal kezdjük, és szépen fokozatosan eljutunk majd a kicsit komplikáltabb jelenségeg megértéséhez is. A tudás elmélyítése érdekében nem csak száraz szövegeket fogsz találni hanem menőőőő szimulációkat, ábrákat és -- talán ami a legfontosabb -- feladatokat amiken keresztül begyakorolhatod az aktuális témát, vagy éppen meggyőződhetsz tudásod pontosságáról.
+
+## De mik is azok a rezgések?
+
+Rezgésnek nevezhetünk tágabb értelemben minden olyan folyamatot amikor egy érték egyes korlátokon belül változik/ingadozik. Hogy fizikai példát hozzunk ilyen lehet a vezetékben folyó váltakozó feszültség, Az ingaóra kitérése, vagy akár a havi átlaghőmérséklet.
+Elméletileg ezek a rezgések lehetnek periódikusak, azaz létezik olyan $$T$$ hogy $$ f(t + T) = f(t) $$ (itt $$f(t)$$ a megfigyelt mennyiség a $$t$$ időpillanatban). A valóságban viszont minden rezgésben van valamilyen kis csillapítás, vagy valami "kis hiba" ami kicsit belerondít ebbe a gyönnyörű maetmaikai képbe. Najó, najó de azért ne vessük teljesen el ezt a képet. Sőt! Vizsgáljunk egy még speciálisabb csoportját a rezgéseknek; a harómikus rezgőmozgást. Baaaam!!!
+
+<!--todo ezt itt neked is at kell nezzed -->
+<!--todo lehetne parbeszedesre csinalni mint a taraszovot, meg am lehetne ilyen képregény is xd -->
+
+## Harmónikus rezgőmozgás (gerjesztetlen, csillapítatlan)
+
+Talán ez a legegyszerűbb és egyben legprimitívebb modellje a rezgéseknek. Ennek ellenére sokszor használjuk ezt a modellt. Na de mit is jelent az, hogy harmónikus? Lényegileg annyit, hogy a megfigyelt rezgést valamilyen színuszos függvénnyel írhatjuk le. Hát ez nagyon szép, de jó lenne erre egy kézzel fogható példát látni. Na nézzük!
+<!-- todo ide jo kerdes, hogy ha valamilyen rezges harmonikus akkor periodikus-e -->
+<!-- todo azt is megkerdezhetjuk h tud e esetleg peldat es akkor ez ilyen felelet valasztos -->
+
+ Vízszintes, súrlódásmentes talajon falhoz rögzítünk egy rugót és a rugó másik végéhez egy $$m$$ tömegű testet rögzítünk. A testet kitérítjük, így a rugó -- eredietileg nyujtatlan -- hossza megváltozik. Elengedjük a testet, így az rezgésbe kezd.
+ <!-- todo kerdes meg fog e allni a test -->
+Figyeljük meg a test kitérését az idő függvényében és ezt ábrázoljuk grafikonon. Talán már láttunk ilyesmi függvényt! Ohh igen ez egészen olyan mint egy koszinusz. Mert valójában az is!
+<!-- todo a szimulaciot ide ugyesen be kell rakni -->
 
 
-This simulation demonstrates the motion of a simple pendulum under the influence of gravity and damping.
-HALOOOOO
+
+
+
+
+
+
+
+
 
 ## The Physics Behind It
 
