@@ -11,19 +11,50 @@ let mu;
 
 function setup(){
   let canvas = createCanvas(1200, 600);
+  let controls = createDiv();
+  controls.id('controls');
+  
   // Check if the container exists (it might not on other pages)
   if (document.getElementById('simulation-container')) {
     canvas.parent('simulation-container');
+    controls.parent('simulation-container');
   }
+
   origin = createVector(300, 0);
   angle = PI/4;
   mu = 0.01;
-
   jozsi = createVector();
 
-  lenSlider = createSlider(20, 400, 200); 
-  dampingSlider = createSlider(0.0, 0.1, 0.01, 0.005);
+  controls.style('display', 'flex');
+  controls.style('gap', '20px');
+  controls.style('margin-top', '10px');
+  controls.style('color', '#333'); // Dark text for visibility on white background
 
+  // Container for Length
+  let lenContainer = createDiv();
+  lenContainer.parent(controls);
+  lenContainer.style('display', 'flex');
+  lenContainer.style('flex-direction', 'column');
+  lenContainer.style('align-items', 'center');
+  
+  let lenLabel = createSpan('Pendulum Length');
+  lenLabel.parent(lenContainer);
+  
+  lenSlider = createSlider(20, 400, 200); 
+  lenSlider.parent(lenContainer);
+
+  // Container for Damping
+  let muContainer = createDiv();
+  muContainer.parent(controls);
+  muContainer.style('display', 'flex');
+  muContainer.style('flex-direction', 'column');
+  muContainer.style('align-items', 'center');
+
+  let muLabel = createSpan('Damping (Friction)');
+  muLabel.parent(muContainer);
+  
+  dampingSlider = createSlider(0.0, 0.1, 0.01, 0.005);
+  dampingSlider.parent(muContainer);
 }
 
 

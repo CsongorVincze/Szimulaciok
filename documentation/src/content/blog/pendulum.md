@@ -1,13 +1,14 @@
 ---
-title: 'Physics Pendulum Simulation'
+title: 'An introduction to oscillations'
 description: 'A simulation of a simple pendulum with physics calculations.'
-pubDate: 'Jul 08 2022'
+pubDate: 'Dec 27, 2025'
 heroImage: '../../assets/blog-placeholder-3.jpg'
 ---
 
-# Physics Pendulum Simulation
+
 
 This simulation demonstrates the motion of a simple pendulum under the influence of gravity and damping.
+HALOOOOO
 
 ## The Physics Behind It
 
