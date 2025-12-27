@@ -6,19 +6,30 @@ let angleA = 0;
 let jozsi;
 let len;
 let gravity = 1;
+//todo: a tomeget is erdemes lenne beallitani
+
+let mu;
 
 function setup(){
   createCanvas(600, 600);
   origin = createVector(300, 0);
   angle = PI/4;
+  mu = 0.01;
 
-  len = 200;
   jozsi = createVector();
+
+  lenSlider = createSlider(20, 400, 200); 
+  dampingSlider = createSlider(0.0, 0.1, 0.01, 0.005);
+  //todo: itt osszeakad a szog allitas a hossz allitassal
+
 }
 
 function draw(){
   background(0);
-  angleA = (-1 * gravity) * sin(angle) / len;
+
+  len = lenSlider.value();
+  mu = dampingSlider.value();
+  angleA = (-1 * gravity) * sin(angle) / len - mu * angleV;
   angleV += angleA;
   angle += angleV;
 
@@ -38,14 +49,22 @@ function draw(){
   line(origin.x, origin.y, jozsi.x, jozsi.y);
   circle(jozsi.x, jozsi.y, 64);
 
+  // rakodjad a nyilakat oda ugy e
+
+  // sebesseg nyil
   stroke(0, 0, 255);
-  strokeWeight(4);
+  strokeWeight(8);
   let velocityX = len * angleV * cos(angle);
   let velocityY = -len * angleV * sin(angle);
   
-  // Calculate bob position temporarily for drawing the arrow starting point
-  let bobX = len * sin(angle) + origin.x;
-  let bobY = len * cos(angle) + origin.y;
-  
-  line(bobX, bobY, bobX + velocityX * 10, bobY + velocityY * 10);
+  line(jozsi.x, jozsi.y, jozsi.x + velocityX * 10, jozsi.y + velocityY * 10);
+  // gyorsulas nyil
+  stroke(255, 0, 0);
+  strokeWeight(8);
+  let accelerationX = len * angleA * cos(angle);
+  let accelerationY = -len * angleA * sin(angle);
+
+  line(jozsi.x, jozsi.y, jozsi.x + accelerationX * 100, jozsi.y + accelerationY * 100);
+
+
 }
