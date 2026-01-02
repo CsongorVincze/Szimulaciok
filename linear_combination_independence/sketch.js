@@ -19,19 +19,52 @@ function setup() {
   button = createButton('Generate New Vectors');
   button.position(20, 80);
   button.mousePressed(generateVectors);
+
+  // Button to generate vectors until collinear
+  collinearButton = createButton('Generate till collinear');
+  collinearButton.position(20, 110);
+  collinearButton.mousePressed(startCollinearSearch);
   
   // Initialize vectors
   generateVectors();
 }
 
+let searching = false;
+
+function startCollinearSearch() {
+  searching = true;
+}
+
+// Helper to generate a vector from a random integer degree
+function randomIntAngleVector() {
+  let deg = floor(random(360));
+  return p5.Vector.fromAngle(radians(deg));
+}
+
 function generateVectors() {
-  // Create two random unit vectors
-  // random2D() gives a unit vector with a random angle (uniform distribution)
-  v1 = p5.Vector.random2D();
-  v2 = p5.Vector.random2D();
+  // Stop searching if we manually generate
+  searching = false;
+  v1 = randomIntAngleVector();
+  v2 = randomIntAngleVector();
 }
 
 function draw() {
+  // If searching, generate new vectors every frame until condition is met
+  if (searching) {
+    v1 = randomIntAngleVector();
+    v2 = randomIntAngleVector();
+    
+    // Check for collinearity (angle is close to 0 or PI)
+    // Using a tighter threshold since we have discrete integer degrees
+    // 1 degree is ~0.017 radians, so we need epsilon < 0.017
+    let angle = v1.angleBetween(v2);
+    let epsilon = 0.001; 
+    if (abs(angle) < epsilon || abs(abs(angle) - PI) < epsilon) {
+      searching = false;
+      console.log("Found collinear vectors!");
+    }
+  }
+
   background(30);
   
   // Display labels for sliders
@@ -40,6 +73,12 @@ function draw() {
   textSize(16);
   text(`v1 scalar: ${slider1.value()}`, 160, 35);
   text(`v2 scalar: ${slider2.value()}`, 160, 65);
+  
+  // Indicate if searching
+  if (searching) {
+    fill(255, 255, 0);
+    text("Searching for collinear vectors...", 20, 150);
+  }
   
   // Move origin to center of canvas
   translate(width / 2, height / 2);
