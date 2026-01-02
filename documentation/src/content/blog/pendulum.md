@@ -25,7 +25,13 @@ Talán ez a legegyszerűbb és egyben legprimitívebb modellje a rezgéseknek. E
  Vízszintes, súrlódásmentes talajon falhoz rögzítünk egy rugót és a rugó másik végéhez egy $$m$$ tömegű testet rögzítünk. A testet kitérítjük, így a rugó -- eredietileg nyujtatlan -- hossza megváltozik. Elengedjük a testet, így az rezgésbe kezd.
  <!-- todo kerdes meg fog e allni a test -->
 Figyeljük meg a test kitérését az idő függvényében és ezt ábrázoljuk grafikonon. Talán már láttunk ilyesmi függvényt! Ohh igen ez egészen olyan mint egy koszinusz. Mert valójában az is!
-<!-- todo a szimulaciot ide ugyesen be kell rakni -->
+<div id="spring-simulation-container" style="display: flex; flex-direction: column; align-items: center; margin: 2rem 0;"></div>
+
+
+
+<script is:inline src="/libraries/p5.min.js"></script>
+<script is:inline src="/libraries/p5.sound.min.js"></script>
+<script is:inline src="/spring_no_damping_sim.js"></script>
 
 
 
@@ -35,8 +41,7 @@ Figyeljük meg a test kitérését az idő függvényében és ezt ábrázoljuk 
 
 
 
-
-
+<!-- 
 ## The Physics Behind It
 
 The motion of a simple pendulum is governed by the following differential equation:
@@ -55,10 +60,10 @@ In our simulation, we approximate this using Euler integration:
 
 1. Calculate angular acceleration based on the current angle and velocity.
 2. Update angular velocity by adding the acceleration.
-3. Update the angle by adding the velocity.
+3. Update the angle by adding the velocity. -->
+
 
 <div id="simulation-container" style="display: flex; flex-direction: column; align-items: center; margin: 2rem 0;"></div>
 
-<script is:inline src="/libraries/p5.min.js"></script>
-<script is:inline src="/libraries/p5.sound.min.js"></script>
-<script is:inline src="/sketch.js"></script>
+
+<script is:inline src="/pendulum_sim.js"></script>

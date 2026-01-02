@@ -50,7 +50,7 @@ function draw() {
   }
 
   // Draw Spring
-  drawSpring(0, 200, x, 200);
+  drawSpring(20, 200, x, 200);
 
   // Draw Mass
   noStroke();
@@ -133,9 +133,10 @@ function drawGraph(history, label, x, y, col) {
   stroke(200);
   rect(0, 0, 500, 150);
   
-  // Midline
+  // Axes (Midline and Y-axis)
   stroke(180);
-  line(0, 75, 500, 75); 
+  line(0, 75, 500, 75); // X-axis
+  line(2, 0, 2, 150);   // Y-axis
   
   // Axes Labels
   noStroke();
@@ -143,6 +144,8 @@ function drawGraph(history, label, x, y, col) {
   textSize(10);
   text("0", 5, 75);
   text("Time", 470, 140);
+  text("+", 5, 15);
+  text("-", 5, 145);
   
   // Plot data
   noFill();

@@ -19,7 +19,7 @@ function setup(){
 
   lenSlider = createSlider(20, 400, 200); 
   dampingSlider = createSlider(0.0, 0.1, 0.01, 0.005);
-
+  
 }
 
 
