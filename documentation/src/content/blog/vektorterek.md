@@ -65,6 +65,10 @@ $$
 $$
 Szóban: az $(u_i)_{i\in I}$ vektorrendszer elemei akkor és csak akkor lineárisan függetlenek, ha a nullvektort előállító lineáris kombinációban szereplő összes együttható nulla.
 
+<div id="linear-independence-container" style="display: flex; flex-direction: column; align-items: center; margin: 2rem 0;"></div>
+<script is:inline src="/libraries/p5.min.js"></script>
+<script is:inline src="/linear_independence_sim.js"></script>
+
 ## Feladatok
 
 1. Vizsgáljuk, hogy egyetlen vektor $v\in V$ lineárisan független-e.
