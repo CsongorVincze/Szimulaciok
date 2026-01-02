@@ -8,13 +8,13 @@ heroImage: '../../assets/blog-placeholder-about.jpg'
 ## Vektorterek
 
 *   Mi az a vektor?
-*   A vektor a vektortér egy eleme?
+*   A vektor a vektortér egy eleme.
 *   Na de akkor mi az a vektortér?
 *   A vektortér egy olyan matematikai struktúra, amelyre igazak a következő állítások / axiómák.
 
-Legyen egy $K$ test (általában $\mathbb{R}$ vagy $\mathbb{C}$). Azt mondhatjuk, hogy $V$ egy vektortér $K$ felett, ha (az alábbiakban $u,v,w\in V$ és $\lambda,\mu\in K$):
+Legyen egy $K$ test (általában $\mathbb{R}$ vagy $\mathbb{C}$). Azt mondhatjuk, hogy $V$ egy vektortér $K$ felett, ha: (az alábbiakban $u,v,w\in V$ és $\lambda,\mu\in K$)
 
-### Addíció
+**Összeadás**
 
 Legyen
 $$
@@ -26,7 +26,7 @@ A következő tulajdonságok teljesülnek:
 3. $\exists\,0\in V$ olyan, hogy $0+v=v$ minden $v\in V$ esetén (nullvektor)
 4. Minden $v\in V$-hez létezik $-v\in V$ úgy, hogy $v+(-v)=0$ (ellenkező elem)
 
-### Skalárisszorzás
+**Skalárral való szorzás**
 
 Legyen
 $$
@@ -38,11 +38,11 @@ A következő axiómák teljesülnek:
 3. $(\lambda+\mu)v=\lambda v + \mu v$ (disztributivitás a skalárok összeadására)
 4. $\lambda(v+u)=\lambda v + \lambda u$ (disztributivitás a vektorok összeadására)
 
-### Példák
+### Példák vektorterekre
 
-*   $\mathbb{R}^n$, $\mathbb{C}^n$ vektorterek
-*   $C(\mathbb{R},\mathbb{R})$ (folytonos függvények tere) mint vektortér
-*   Sorozatok tere (mindenütt definiált összeadás és skalárszorzás)
+*   $\mathbb{R}^n$, $\mathbb{C}^n$
+*   $C(\mathbb{R},\mathbb{R})$ (folytonos függvények tere)
+*   Sorozatok tere (mindenütt definiált összeadás és skalárszorzás) <!-- ez itt miez -->
 *   $\{0\}$ (triviális vektortér)
 
 ## Lineáris kombináció
@@ -78,5 +78,6 @@ Szóban: az $(u_i)_{i\in I}$ vektorrendszer elemei akkor és csak akkor lineári
 Egy $V$ vektortérben az $(u_i)_{i\in I}$ vektorrendszer bázis, ha
 1. $(u_i)_{i\in I}$ lineárisan független,
 2. minden $x\in V$ előállítható az $(u_i)_{i\in I}$ lineáris kombinációjaként, azaz $\operatorname{span}\{u_i:i\in I\}=V$.
+<!--todo na ezt en nem igy irtam -->
 
 **Állítás**: Minden vektortérben van bázis.
