@@ -2,7 +2,7 @@
 title: 'Bevezetés a vektorterekbe'
 description: 'A vektorterek axiomatikus felépítése, lineáris kombináció, függetlenség és bázis.'
 pubDate: 'Jan 02, 2026'
-heroImage: '../../assets/blog-placeholder-about.jpg'
+heroImage: '../../assets/blog-placeholder-4.jpg'
 ---
 
 ## Vektorterek
