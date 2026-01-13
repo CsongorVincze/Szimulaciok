@@ -1,5 +1,5 @@
 ---
-title: 'An introduction to oscillations'
+title: 'Bevezetés a rezgésekbe'
 description: 'A simulation of a simple pendulum with physics calculations.'
 pubDate: 'Dec 27, 2025'
 heroImage: '../../assets/blog-placeholder-3.jpg'
