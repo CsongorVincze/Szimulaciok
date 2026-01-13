@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import BoidBackground from '../components/BoidBackground.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
@@ -11,6 +12,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
+		<BoidBackground />
 		<Header />
 		<main>
 			<h1>Sziaaaaa!</h1>
@@ -24,5 +26,11 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 			</p>
 		</main>
 		<Footer />
+		<style>
+			/* Override global body background to let the canvas show through */
+			:global(body) {
+				background: transparent;
+			}
+		</style>
 	</body>
 </html>
