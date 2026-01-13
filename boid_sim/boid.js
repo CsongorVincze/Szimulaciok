@@ -92,14 +92,18 @@ class Boid {
         let alignment = this.align(boids);
         let cohesion = this.cohesion(boids);
         let separation = this.separation(boids);
+        let mouseForce = this.interact();
 
         alignment.mult(alignSlider.value());
         cohesion.mult(cohesionSlider.value());
         separation.mult(separationSlider.value());
+        // Interaction force can be strong to be noticeable
+        mouseForce.mult(5);
 
         this.acceleration.add(alignment);
         this.acceleration.add(cohesion);
         this.acceleration.add(separation);
+        this.acceleration.add(mouseForce);
     }
 
     update() {
@@ -124,10 +128,40 @@ class Boid {
         }
     }
 
+    interact() {
+        let steering = createVector();
+        // Check if mouse is inside canvas
+        if (mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height) {
+            let mousePos = createVector(mouseX, mouseY);
+            let d = dist(this.position.x, this.position.y, mousePos.x, mousePos.y);
+            let perceptionRadius = 100;
+
+            if (d < perceptionRadius) {
+                let diff = p5.Vector.sub(this.position, mousePos);
+                diff.div(d); // Weight by distance
+                steering.add(diff);
+                steering.setMag(this.maxSpeed);
+                steering.sub(this.velocity);
+                steering.limit(this.maxForce);
+            }
+        }
+        return steering;
+    }
+
     show() {
-        strokeWeight(16);
+        let theta = this.velocity.heading() + radians(90);
+        fill(200, 100);
         stroke(255);
-        point(this.position.x, this.position.y);
+        strokeWeight(1);
+        push();
+        translate(this.position.x, this.position.y);
+        rotate(theta);
+        beginShape();
+        vertex(0, -6); // Tip
+        vertex(-3, 6); // Bottom left
+        vertex(3, 6);  // Bottom right
+        endShape(CLOSE);
+        pop();
     }
 
 
