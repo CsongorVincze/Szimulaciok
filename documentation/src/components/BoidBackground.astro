@@ -143,9 +143,9 @@
 
       show() {
         let theta = this.velocity.heading() + p.radians(90);
-        // Darkened colors for light background
-        p.stroke(50, 60, 80, 100);
-        p.fill(50, 60, 80, 150);
+        // Light colors for dark background (honeydew/frosted-blue)
+        p.stroke(168, 218, 220, 100); // frosted-blue with alpha
+        p.fill(241, 250, 238, 150);   // honeydew with alpha
         p.push();
         p.translate(this.position.x, this.position.y);
         p.rotate(theta);

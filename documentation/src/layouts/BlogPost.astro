@@ -5,10 +5,13 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import PostGraph from '../components/PostGraph.astro';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & {
+	headings?: { depth: number; slug: string; text: string }[];
+};
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, headings } = Astro.props;
 ---
 
 <html lang="en">
@@ -29,6 +32,9 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				margin: 0 auto;
 				border-radius: 12px;
 				box-shadow: var(--box-shadow);
+			}
+			.hero-image img.round-style {
+				border-radius: 999px;
 			}
 			.prose {
 				width: 720px;
@@ -53,6 +59,10 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			.last-updated-on {
 				font-style: italic;
 			}
+			/* Override global background for blog posts */
+			body {
+				background-color: black;
+			}
 		</style>
 	</head>
 
@@ -61,7 +71,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<main>
 			<article>
 				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
+					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" class={heroImage.src.includes('sponge') ? 'round-style' : ''} />}
 				</div>
 				<div class="prose">
 					<div class="title">
@@ -78,6 +88,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 						<h1>{title}</h1>
 						<hr />
 					</div>
+					{headings && headings.length > 0 && <PostGraph headings={headings} />}
 					<slot />
 				</div>
 			</article>

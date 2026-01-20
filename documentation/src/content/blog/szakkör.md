@@ -2,7 +2,8 @@
 title: 'Szakkörke'
 description: 'Így állunk mostanság'
 pubDate: 'Jan 3, 2026'
-heroImage: '../../assets/blog-placeholder-2.jpg'
+heroImage: '../../assets/szakkor felulnezet.JPG'
+tags: ['projects', 'robotics', '3d-printing', 'programming']
 ---
 
 Sziaaaaa!
