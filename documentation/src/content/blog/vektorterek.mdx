@@ -178,8 +178,7 @@ Viszont ahhoz, hogy invertáljunk kell az algebránkba egységelem. Azokat az as
 Általában az egységelemet $ e $-vel jelöljük. Az $A$ egységelemes algebrára teljesülnie kell, hogy: $ ae = ea = a : \forall a \in A $
 Na mostmár definiálhatjuk az inverzet! $ a \in A $ invertálható, ha: $ \exists a^{-1} \in A : a^{-1}a = aa^{-1} = e $
 
-Vigyázat az, hogy létezik egységelem az algebránkban nem jelenti azt, hogy feltétlen minden eleme az algebránknak invertálható!
-Nézd például a következő mátrixot:
+Vigyázat az, hogy létezik egységelem az algebránkban nem jelenti azt, hogy feltétlen minden eleme az algebránknak invertálható! Nézd például a következő mátrixot:
 $B =
 \begin{bmatrix}
 2 & 2\\
@@ -188,21 +187,107 @@ $B =
 
 ### Asszociatív algebra spektruma
 
-Egy egységelemes asszociatív algebrának létezik spektruma is. Erre is van egy képlet.:
+Egy egységelemes asszociatív algebrának létezik spektruma is. Az algebra egy $ a $ elemének a spktruma azoknak a skalároknak a halmaza amikre nem létezik inverze $ a - \lambda e $-nak:
 
 $$
-sp(a) = \{ \lambda \in \mathbb{K} : \nexists (\lambda e - a)^{-1} \}
+sp(a) = \{ \lambda \in \mathbb{K} : \nexists (a - \lambda e)^{-1} \}
 $$
+{/* todo ezt meg lehet forditani nem? */}
 
 Valahol már láttunk hasonlót. Ismerős ez valahonnét?
 
 🙋‍♂️:Sajnos nem.
 
-👨‍🏫:Ha visszaemlékszünk a sajátérték számításra, ott valami ilyesmi képletünk volt: 
+👨‍🏫:Ha visszaemlékszünk a sajátérték számításra, ott valami ilyesmi képletünk volt: $ \lambda $ sajátértéke $ A $-nak, ha $ det(A - \lambda I) = 0 $
+
+🙋‍♂️:Aaa, mostmár értem. Ha nem létezik $ (a - \lambda e) $-nek inverze az a mátrixok nyelvén azzal egyenértékű, hogy $ det(A - \lambda I) = 0 $ Mivel ha egy mátrixnak a determinánsa $ 0 $ az azt jelenti, hogy a mátrix nem invertálható (és vica verza).
+
+👨‍🏫:Igen, a mátrixoknál valóban a spektrum egyenértékű a sajátértékek halmazával (végtelen dimenzióban már nem csak a sajátértékekből áll a spektrum, de ez most nem fontos).
 
 
 
 
 ## Jacobson-lemma:
 
-👨‍🏫:Oooookes, most megnézünk mengint egy kicsit absztraktabb állítást. Így nagy vonalakban az állítás arról szól, hogy ha van egy egységelemes algebránk akkor aminek két eleme mondjuk a és b, akkor ab spektruma nem nagyon különbözik ba spektrumától.
+👨‍🏫:Oooookes, most megnézünk mengint egy kicsit absztraktabb állítást. Igérem lesz kicsit földhöz ragadtabb következménye ami hasznunkra válhat.
+
+Így nagy vonalakban az állítás arról szól, hogy ha van egy egységelemes algebránk akkor aminek két eleme a és b, akkor ab spektruma nem nagyon különbözik ba spektrumától. Ez kicsit preciízebben.:
+
+Van egy $ A $ egységelemes ($ e $) algebránk. Ahol $ a, b \in A $. Ekkor:
+$$
+sp(ab) \cup \{0\} = sp(ba) \cup \{0\}
+$$
+
+Najó próbáljuk meg belátni ezt az állítást.
+
+
+$$
+\begin{aligned}
+& \text{Legyen } \lambda \notin \sigma(ab), \quad \lambda \in \mathbb{K}, \lambda \neq 0 \\
+& \text{Legyen } c := (ab - \lambda e)^{-1} \\
+& \text{TFH. } (ba - \lambda e)^{-1} = \alpha e + \beta bca \quad (\text{where } \alpha, \beta \in \mathbb{K}) \\
+\\
+& \text{Ahhoz hogy a feltétel teljesüljön: } (ba - \lambda e)(\alpha e + \beta bca) = e \\
+\\
+& \text{Kibontva:} \\
+& \alpha ba + \beta babca - \lambda \alpha e - \lambda \beta bca = e \\
+\\
+& \text{Válasszuk meg } \alpha \text{ értékét:} \\
+& -\lambda \alpha = 1 \implies \alpha = -\frac{1}{\lambda} \\
+\\
+& e\text{-vel egyszerűsítve:} \\
+& \alpha ba + \beta babca - \lambda \beta bca = 0 \\
+& b (\alpha e + \beta abc - \beta \lambda c) a = 0 \\
+& b \left( \alpha e + \beta (ab - \lambda e)c \right) a = 0 \\
+\\
+& \text{Mivel } (ab - \lambda e)c = e: \\
+& b (\alpha e + \beta e) a = 0 \\
+\\
+& \text{legyen:} \beta = \frac{1}{\lambda}
+\\
+& b (0) a = 0 \\
+& 0 = 0 \\
+& \text{Ezzel az állítást beláttuk az egyik irányba.}\\
+\\
+& \text{Másik irány feltétele: } (\alpha e + \beta bca)(ba - \lambda e) = e \\
+\\
+& \text{Kibontva:} \\
+& \alpha ba - \lambda \alpha e + \beta bcaba - \beta \lambda bca = e \\
+\\
+& a\text{ értékét megválasztva:} \\
+& -\lambda \alpha = 1 \implies \alpha = -\frac{1}{\lambda} \\
+\\
+& \text{Egyszerűsítve:} \\
+& \alpha ba + \beta bcaba - \beta \lambda bca = 0 \\
+& b (\alpha e + \beta cab - \beta \lambda c) a = 0 \\
+& b \left( \alpha e + \beta c(ab - \lambda e) \right) a = 0 \\
+\\
+& \text{Mivel:} \\
+& c = (ab - \lambda e)^{-1}, \text{ we have } c(ab - \lambda e) = e: \\
+& b (\alpha e + \beta e) a = 0 \\
+\\
+& \text{legyen:}\beta = \frac{1}{\lambda}\\
+& b (0) a = 0 \\
+& \text{Ezzel az állítást beláttuk a másik irányba is.}\\
+\end{aligned}
+$$
+
+
+
+
+
+
+
+👨‍🏫: Ez a tétel és a hozzá tartozó levezetés talán kicsit absztraktnak tűnhet, de van ennek a tételnek egy hasznos következménye. Igaz-e az hogy ha van két $ n \times n $-es mátrixunk: $ A, B $ akkor: $AB = BA$ ?
+
+<Question
+  question="Mi a válasz a fönti kérdésre?"
+  options={[
+    "Igen mindig",
+    "Nem soha",
+    "Általában nem (lehet, hogy spec. esetben igen)"
+  ]}
+  correctAnswerIndex={2}
+/>
+
+👨‍🏫: Pontosan. A mátrixszorzás nem feltétlen kommutatív. A Jacobson-lemma miatt viszont beláthatjuk, hogy $ sp(AB) = sp(BA) $. Ez elég menőőő. Ha nem A és B szorzata nem feltétlen kommutatív a spektrumuk azonos. Tehát A sajátértékeik megegyeznek.
