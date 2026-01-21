@@ -141,7 +141,7 @@ EZ ITT TOK MAS LESZ MOST
 
 👨‍🏫: Emlékszel még arra amikor definiáltuk a skalárszorzást egy vektortéren? Eredetileg a vektortér elemeit csak összeadni tudtuk, meg skalárral szorozni (jo persze volt inverz meg ilyesmik). Zavart, hogy nem tudtunk összeszorozni két vektort. Így bevezettünk egy olyan függvényt ami megeszik két vektort és kiköp egy skalárt. Ez már egész jó! Bár azért még mindig zavar, hogy nem tudunk két vektort összeszorozni úgy, hogy egy harmadik vektort kapjunk.
 
-🙋‍♂️: De várjunk az nxn-es mátrixok vektorteret alkotnak, és mátrixokat tudunk összeszorozni. Akkor ha jól értem akkor vannak vektorterek ahol már autómatikusan működik a vektorok szorzása.
+🙋‍♂️: De várjunk az $n \times n $-es mátrixok vektorteret alkotnak, és mátrixokat tudunk összeszorozni. Akkor ha jól értem akkor vannak vektorterek ahol már autómatikusan működik a vektorok szorzása.
 
 👨‍🏫: Pontosan. Nagyon jó meglátás! Ha megfigyeljük az nxn-es mátrixok szorzására vonatkozó jellemzőket a következőket kapjuk: A, B, C mátrixok $ \lambda \mu $ skalárok
 1. $ A(BC) = (AB)C $
@@ -172,7 +172,33 @@ Namármost nem csak a mátrixokra lehetnek igazak ezek a szabályok. Ha egy vekt
 🙋‍♂️:Hmmm... Ha egy mátrixnak nem zérus volt a determinánsa akkor invertálható volt, ha jól emlékszem.
 
 👨‍🏫:Nagyon jóó. Ha visszaemlékezünk $ A^{-1} $ az  $A$ mátrix inverze volt ha $ A^{-1}A = AA^{-1} = I $ Ahol $ I $ az $n \times n $-es
-az identitásmátrix volt.
+identitásmátrix volt.
+
+Viszont ahhoz, hogy invertáljunk kell az algebránkba egységelem. Azokat az asszociatív algebrákat amiben ilyen van azt egységelemes asszociatív algebrának hívjuk (nagyon meglepő).
+Általában az egységelemet $ e $-vel jelöljük. Az $A$ egységelemes algebrára teljesülnie kell, hogy: $ ae = ea = a : \forall a \in A $
+Na mostmár definiálhatjuk az inverzet! $ a \in A $ invertálható, ha: $ \exists a^{-1} \in A : a^{-1}a = aa^{-1} = e $
+
+Vigyázat az, hogy létezik egységelem az algebránkban nem jelenti azt, hogy feltétlen minden eleme az algebránknak invertálható!
+Nézd például a következő mátrixot:
+$B =
+\begin{bmatrix}
+2 & 2\\
+2 & 2
+\end{bmatrix} $
+
+### Asszociatív algebra spektruma
+
+Egy egységelemes asszociatív algebrának létezik spektruma is. Erre is van egy képlet.:
+
+$$
+sp(a) = \{ \lambda \in \mathbb{K} : \nexists (\lambda e - a)^{-1} \}
+$$
+
+Valahol már láttunk hasonlót. Ismerős ez valahonnét?
+
+🙋‍♂️:Sajnos nem.
+
+👨‍🏫:Ha visszaemlékszünk a sajátérték számításra, ott valami ilyesmi képletünk volt: 
 
 
 
