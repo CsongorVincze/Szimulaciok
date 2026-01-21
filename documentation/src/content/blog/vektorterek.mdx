@@ -6,6 +6,8 @@ heroImage: '../../assets/sponge.png'
 tags: ['math', 'linear-algebra', 'vectors']
 ---
 
+import Question from '../../components/Question.astro';
+
 ## Vektorterek
 
 *   Mi az a vektor?
@@ -43,7 +45,7 @@ A következő axiómák teljesülnek:
 
 *   $\mathbb{R}^n$, $\mathbb{C}^n$
 *   $C(\mathbb{R},\mathbb{R})$ (folytonos függvények tere)
-*   Sorozatok tere (mindenütt definiált összeadás és skalárszorzás) <!-- ez itt miez -->
+*   Sorozatok tere (mindenütt definiált összeadás és skalárszorzás) {/* ez itt miez */}
 *   $\{0\}$ (triviális vektortér)
 
 ## Lineáris kombináció
@@ -54,7 +56,7 @@ Az axiómákból következik, hogy ha $I$ indexhalmazon
 
 akkor
 $$
-v=\sum_{i\in I}\lambda_i u_i \in V.
+v=\sum_{i \in I}\lambda_i u_i \in V.
 $$
 Ekkor azt mondjuk, hogy $\sum_{i\in I}\lambda_i u_i$ az $(u_i)_{i\in I}$ vektorok valamely lineáris kombinációja.
 
@@ -66,7 +68,7 @@ $$
 $$
 Szóban: az $(u_i)_{i\in I}$ vektorrendszer elemei akkor és csak akkor lineárisan függetlenek, ha a nullvektort előállító lineáris kombinációban szereplő összes együttható nulla.
 
-<div id="linear-independence-container" style="display: flex; flex-direction: column; align-items: center; margin: 2rem 0;"></div>
+<div id="linear-independence-container" style={{display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '2rem 0'}}></div>
 <script is:inline src="/libraries/p5.min.js"></script>
 <script is:inline src="/linear_independence_sim.js"></script>
 
@@ -83,13 +85,13 @@ Szóban: az $(u_i)_{i\in I}$ vektorrendszer elemei akkor és csak akkor lineári
 Egy $V$ vektortérben az $(u_i)_{i\in I}$ vektorrendszer bázis, ha
 1. $(u_i)_{i\in I}$ lineárisan független,
 2. minden $x\in V$ előállítható az $(u_i)_{i\in I}$ lineáris kombinációjaként, azaz $\operatorname{span}\{u_i:i\in I\}=V$.
-<!--todo na ezt en nem igy irtam -->
+{/*todo na ezt en nem igy irtam */}
 
 **Állítás**: Minden vektortérben van bázis.
-<!-- 
+{/* 
 > 🙋‍♂️ **Hallgató**: Várjunk csak, tényleg *minden* vektortérnek van bázisa? Még a legbonyolultabb, végtelen dimenziós tereknek is?
 >
-> 👨‍🏫 **Oktató**: Igen, ez egy alapvető tétel a lineáris algebrában. Bár a végtelen dimenziós esetekben a bizonyításhoz szükség van a kiválasztási axiómára, elméletileg minden vektortér rendelkezik bázissal. -->
+> 👨‍🏫 **Oktató**: Igen, ez egy alapvető tétel a lineáris algebrában. Bár a végtelen dimenziós esetekben a bizonyításhoz szükség van a kiválasztási axiómára, elméletileg minden vektortér rendelkezik bázissal. */}
 
 ## Skalárszorzatos vektorterek
 
@@ -105,7 +107,7 @@ Egy $V$ vektortérben az $(u_i)_{i\in I}$ vektorrendszer bázis, ha
 
 👨‍🏫: Wooow, nagyon jo ügyesen megfigyelted ezeket a tulajdonságokat! Persze egy kis kiegészítésre azért szükség lesz, ha a vektorterünket esetleg komplex számtest felett akarjuk definiálni, de alapvetően elég hasonló marad a szitu ahhoz amit mondtál. (Használjuk a $ \langle \cdot, \cdot \rangle $ jelölést.)
 
-<!-- todo ide johetne kérdés -->
+{/* todo ide johetne kérdés */}
 
 Skalárszorzat feltétele egy vektortérben:
 
@@ -115,17 +117,66 @@ Skalárszorzat feltétele egy vektortérben:
 4. $ \langle a, a \rangle > 0 $ ha a nem a nullvektor
 5. $ \langle a, a \rangle = 0 $ ha a a nullvektor
 
-🙋‍♂️: Oké, nézhetnénk erre egy példát?
+🙋‍♂️: Oké, hogy segít ez nekünk a folytonos függvényeken értelmezni a skalárszorzást? Nézhetnénk erre egy példát?
+
+👨‍🏫: Azt már korábban beláttuk, hogy a folytonos függvények a $[0, 1]$ intervallumon vektorteret alkotnak. tekintsük a következő skaláris szorzást:
+
+$ \langle f, g \rangle = \int_{0}^{1}f(x)g(x) \, dx $
+
+ha lecsekkolod a fent említett kritériumokat rájössz, hogy ez egy valid skaláris szorzás ezen a vektortéren.
+{/* todo ezt itt lehet levezethetnem */}
+
+<div id="p-norm-container" style={{display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '2rem 0'}}></div>
+<script is:inline src="/p_norm_sim.js"></script>
 
 
-## Na
-
-### haloooo
-
-### sziaaaaa
-
-## csaaa (from: Vektorterek; to: Na)
 
 
 
 SPONGZABOBOS KEPEN MATRIXOK NEZEGETESE
+
+EZ ITT TOK MAS LESZ MOST
+
+## Asszociatív algebra
+
+👨‍🏫: Emlékszel még arra amikor definiáltuk a skalárszorzást egy vektortéren? Eredetileg a vektortér elemeit csak összeadni tudtuk, meg skalárral szorozni (jo persze volt inverz meg ilyesmik). Zavart, hogy nem tudtunk összeszorozni két vektort. Így bevezettünk egy olyan függvényt ami megeszik két vektort és kiköp egy skalárt. Ez már egész jó! Bár azért még mindig zavar, hogy nem tudunk két vektort összeszorozni úgy, hogy egy harmadik vektort kapjunk.
+
+🙋‍♂️: De várjunk az nxn-es mátrixok vektorteret alkotnak, és mátrixokat tudunk összeszorozni. Akkor ha jól értem akkor vannak vektorterek ahol már autómatikusan működik a vektorok szorzása.
+
+👨‍🏫: Pontosan. Nagyon jó meglátás! Ha megfigyeljük az nxn-es mátrixok szorzására vonatkozó jellemzőket a következőket kapjuk: A, B, C mátrixok $ \lambda \mu $ skalárok
+1. $ A(BC) = (AB)C $
+2. $ A(B + C) = AB + AC $
+3. $ (A + B)C = AC + BC $
+4. $ (\lambda A) (\mu B) = (\lambda \mu) (AB) $
+
+Namármost nem csak a mátrixokra lehetnek igazak ezek a szabályok. Ha egy vektortér elemeire igazak a fönti szabályok akkor azt mondhatjuk, hogy a vektortér elemei egy asszociatív algebrát alkotnak. Általában kis betűvel írjuk a vektorokat, így a szabályok egy asszociatív algebra létezéséhez:
+
+1. $ a(bc) = (ab)c $
+2. $ a(b + c) = ab + ac $
+3. $ (a + b)c = ac + bc $
+4. $ (\lambda a) (\mu b) = (\lambda \mu) (ab) $
+(ha $\forall a, b, c \in V$ és $ \forall \lambda, \mu \in \mathbb{K}$ skalárra igazak a szabályok)
+
+<Question
+  question="Az alábbi három közül mi nem alkot asszociatív algebrát?"
+  options={[
+    "Polinomok a standard polinom szorzással",
+    "R^3 ban lévő vektorok vektoriális szorzással",
+    "f:R->R folytonos függvények, a szorzás a függvényértékek normál szorzása"
+  ]}
+  correctAnswerIndex={1}
+/>
+
+👨‍🏫: Ha visszatekintünk a mátrixok szorzására egyes $n \times n $ mátrixoknak volt egy elég fontos tulajdonsága. Emlékszel mi volt ez?
+
+🙋‍♂️:Hmmm... Ha egy mátrixnak nem zérus volt a determinánsa akkor invertálható volt, ha jól emlékszem.
+
+👨‍🏫:Nagyon jóó. Ha visszaemlékezünk $ A^{-1} $ az  $A$ mátrix inverze volt ha $ A^{-1}A = AA^{-1} = I $ Ahol $ I $ az $n \times n $-es
+az identitásmátrix volt.
+
+
+
+
+## Jacobson-lemma:
+
+👨‍🏫:Oooookes, most megnézünk mengint egy kicsit absztraktabb állítást. Így nagy vonalakban az állítás arról szól, hogy ha van egy egységelemes algebránk akkor aminek két eleme mondjuk a és b, akkor ab spektruma nem nagyon különbözik ba spektrumától.

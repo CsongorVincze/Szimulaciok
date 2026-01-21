@@ -133,7 +133,7 @@ const { question, options, correctAnswerIndex } = Astro.props;
   .option-content {
     flex-grow: 1;
     font-weight: 500;
-    color: var(--oxford-navy);
+    color: #1d3557; /* var(--oxford-navy) fallback */
     font-size: 1.05rem;
   }
 
@@ -241,7 +241,7 @@ const { question, options, correctAnswerIndex } = Astro.props;
       color: var(--frosted-blue);
     }
     .option-btn:hover:not(:disabled) {
-      background: var(--punch-red);
+      background: var(--oxford-navy);
       border-color: var(--honeydew);
     }
   }
