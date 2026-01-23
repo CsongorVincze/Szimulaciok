@@ -8,13 +8,35 @@ tags: ['math', 'linear-algebra', 'vectors']
 
 import Question from '../../components/Question.astro';
 import ProofBox from '../../components/ProofBox.astro';
+import AxiomBox from '../../components/AxiomBox.astro';
 
 ## Vektorterek
 
-*   Mi az a vektor?
-*   A vektor a vektortér egy eleme.
-*   Na de akkor mi az a vektortér?
-*   A vektortér egy olyan matematikai struktúra, amelyre igazak a következő állítások / axiómák.
+👨‍🏫: Elerkeztunk egy ujabb fontos reszhez. Mit tanultatok a kozepiskolaban a vektorokrol?
+
+🙋‍♂️: Hat a vektor az ilyen nyilacska a sikon vagy a terben. De kicsit formalisabban olyasmit mondtunk hogy egy iranyitott szakasz, vagy tombbe rendezett szamok.
+
+👨‍🏫: Igen, igen valoban lehet igy reprezentalni az $\mathbb{R}^{2}$-ben vagy $\mathbb{R}^{3}$-ban lako vektorokat. Emellett matematikusok megalkottak egy szabalyrendszert ami kiszelesiti a vektorok fogalmat. Gondolhatsz ugy is a dologra hogy megfigyeljuk hogy a terben lako nyilacskakra milyen szabalyok igazak, osszegyujtjuk ezeket a szabalyokat, es azok a dolgoka mikre ezek a szabalyok igazak azokat vektornak fogjuk hivni. Vagyis pontosabban azt a halmazt amire igazak ezek a szabalyok azt vektorternek, a halmaz egy elemet pedig vektornak. Van otleted hogy milyen szabalyokbol alkotjak a vektorter axiomait?
+
+🙋‍♂️: Gondolom ossze kell tudjunk adni a vektorokat. Az is jo lenne ha tudnank oket megnyujtani, tehat skalarral szorozni. Meg amugy tudtunk szorozni is vektorokat a "rendes" terben.
+
+👨‍🏫: Ezek igen jo gondolatok. Kettot kapasbol bele is rakunk a vektorter axiomaiba. Egyet viszont ki fogunk hagyni. 
+
+<Question
+  question="Szerinted melyik szabalyt hagyjuk ki a vektorterek axiomai kozul?"
+  options={[
+    "vektorok osszeadasa",
+    "vektorok megnyujtasa (skalarral valo szorzas)",
+    "ket vektor osszeszorzasa"
+  ]}
+  correctAnswerIndex={3}
+/>
+
+{/* todo le kell irni mi a test es mi a csopi */}
+
+
+
+<AxiomBox title="Vektortér Axiómák">
 
 Legyen egy $K$ test (általában $\mathbb{R}$ vagy $\mathbb{C}$). Azt mondhatjuk, hogy $V$ egy vektortér $K$ felett, ha: (az alábbiakban $u,v,w\in V$ és $\lambda,\mu\in K$)
 
@@ -25,10 +47,14 @@ $$
 + : V\times V \to V,\qquad (u,v)\mapsto u+v.
 $$
 A következő tulajdonságok teljesülnek:
-1. $u+(v+w)=(u+v)+w$ (asszociatív)
-2. $u+v=v+u$ (kommutatív)
-3. $\exists\,0\in V$ olyan, hogy $0+v=v$ minden $v\in V$ esetén (nullvektor)
-4. Minden $v\in V$-hez létezik $-v\in V$ úgy, hogy $v+(-v)=0$ (ellenkező elem)
+$$
+\begin{aligned}
+1. \quad & u+(v+w)=(u+v)+w && (\text{asszociatív}) \\
+2. \quad & u+v=v+u && (\text{kommutatív}) \\
+3. \quad & \exists\,0\in V \text{ olyan, hogy } 0+v=v \quad \forall v\in V \text{ esetén} && (\text{nullvektor}) \\
+4. \quad & \forall v\in V\text{-hez } \exists -v\in V \text{ úgy, hogy } v+(-v)=0 && (\text{ellenkező elem})
+\end{aligned}
+$$
 
 **Skalárral való szorzás**
 
@@ -37,21 +63,29 @@ $$
 \cdot : K\times V \to V,\qquad (\lambda,v)\mapsto \lambda v.
 $$
 A következő axiómák teljesülnek:
-1. $\lambda(\mu v)=(\lambda\mu)v$ (asszociativitás a skalárokkal)
-2. $\exists\,1\in K$ úgy, hogy $1\cdot v = v$ minden $v\in V$ esetén
-3. $(\lambda+\mu)v=\lambda v + \mu v$ (disztributivitás a skalárok összeadására)
-4. $\lambda(v+u)=\lambda v + \lambda u$ (disztributivitás a vektorok összeadására)
+$$
+\begin{aligned}
+1. \quad & \lambda(\mu v)=(\lambda\mu)v && (\text{ez nem pont asszociativitás de hasonló}) \\
+2. \quad & \exists\,1\in K \text{ úgy, hogy } 1\cdot v = v \quad \forall v\in V \text{ esetén} && \\
+3. \quad & (\lambda+\mu)v=\lambda v + \mu v && (\text{disztributivitás a skalárok összeadására}) \\
+4. \quad & \lambda(v+u)=\lambda v + \lambda u && (\text{disztributivitás a vektorok összeadására})
+\end{aligned}
+$$
+
+</AxiomBox>
 
 **Példák vektorterekre**
 
+👨‍🏫: Probald meg belatni hogy az alabbi halmazok vektorteret alkotnak.
+
 *   $\mathbb{R}^n$, $\mathbb{C}^n$
 *   $C(\mathbb{R},\mathbb{R})$ (folytonos függvények tere)
-*   Sorozatok tere (mindenütt definiált összeadás és skalárszorzás) {/* ez itt miez */}
+*   Sorozatok tere (mindenütt definiált összeadás és skalárszorzás){/* ez itt miez */}
 *   $\{0\}$ (triviális vektortér)
-
+{/* todo ezt itt meg nagyon szepiteni kene */}
 ## Lineáris kombináció
 
-Az axiómákból következik, hogy ha $I$ indexhalmazon
+👨‍🏫: Mivel a vektorter zart az osszeadasra, igy az $I$ indexhalmazon
 1. $\forall i\in I:\; u_i\in V$,
 2. $\forall i\in I:\; \lambda_i\in K$,
 
@@ -89,10 +123,48 @@ Egy $V$ vektortérben az $(u_i)_{i\in I}$ vektorrendszer bázis, ha
 {/*todo na ezt en nem igy irtam */}
 
 **Állítás**: Minden vektortérben van bázis.
-{/* 
-> 🙋‍♂️ **Hallgató**: Várjunk csak, tényleg *minden* vektortérnek van bázisa? Még a legbonyolultabb, végtelen dimenziós tereknek is?
->
-> 👨‍🏫 **Oktató**: Igen, ez egy alapvető tétel a lineáris algebrában. Bár a végtelen dimenziós esetekben a bizonyításhoz szükség van a kiválasztási axiómára, elméletileg minden vektortér rendelkezik bázissal. */}
+
+## Linearis alter, linearis burok
+
+👨‍🏫: Vegyuk az ($\mathbb{R}^3$) teret. Errol mar belattuk, hogy vektorteret alkot. Vegyuk ehhez a szokasos, standard $ x, y, z $ koordinatazast. Most vegyunk azonak a vektoroknak a halmazat amelyek $ [a, b, 0] $ alakba irhatoak. Mi tortenik ha ket ilyen vektort osszeadunk?
+
+🙋‍♂️: Hat tovabbra is az $ xy $ sikban maradnak.
+
+👨‍🏫: Pontosan. Es ha egy ilyen vektort megszorzunk egy skalarral?
+
+🙋‍♂️: Szinten az $ xy $ sikban marad a modositott vektor.
+
+👨‍🏫: Ezek a vektorok mar eredetileg is egy vektorter elemei voltak. Igy mit mondhatunk el ezeknek az $ [a, b, 0] $ alaku vektorok halmazarol?
+
+🙋‍♂️: Hat igazak rajuk a vektorter axiomai. Es valahogy igy nem tudnak "kimenni" az $ xy $ sikrol. Szoval azt gondolom hogy ok is egyfajta kisebb vektorteret alkotnak.
+
+cNagyon jooo. Ezt linearis alternek nevezzuk. $ L \subseteq V $ linearis altere a $V$ vektorterunknek, ha:
+
+$$
+\begin{aligned}
+1. \quad & a, b \in L \implies a + b \in L \\
+2. \quad & a \in L, \lambda \in K \implies \lambda a \in L
+\end{aligned}
+$$
+
+{/* todo ide kep az egyenesrol es arrol h subset */}
+
+🙋‍♂️: Szoval a null vektor mindig bennevan a linaris alberben, es az egesz vektorter mindig egy linaris alter is egyben, ha jol ertem
+
+👨‍🏫: Igen, igen, nagyon jó észrevételek. Haladjunk tovább a lineáris burok fogalmára. Ha van egy $V$ vektorterünk és abban egy $A = \{v_1, v_2, \dots, v_n\}$ vektorrendszerünk, akkor $A$ lineáris burka ($\langle A \rangle$):
+
+$$
+\langle A \rangle = \left\{ \sum_{i=1}^{n} \lambda_i v_i : \lambda_i \in \mathbb{K}, n \in \mathbb{N} \right\}
+$$
+
+🙋‍♂️: Ez a burok linaris burok dolog igazabol linearis alteret konstrual, nem?
+
+👨‍🏫: Igen. Ha osszeadod ket linearis kombinaciojat a vektorrendeszernek akkor az meg mindig a vektrorrendszered linearis kombinacioja lesz. Ugyanez igaz a szorzasra is. Tehat valoban, a linaris burok elkeszitese egy olyan "gepezet" ami a vektorrendszerunkre illeszt egy linaris alteret. De meg az is igaz hogy a leheto legkisebb linaris alteret illeszti az eredeti vektorainkra.
+
+
+
+
+
 
 ## Skalárszorzatos vektorterek
 
@@ -291,7 +363,7 @@ $$
   correctAnswerIndex={2}
 />
 
-👨‍🏫: Pontosan. A mátrixszorzás nem feltétlen kommutatív. A Jacobson-lemma miatt viszont beláthatjuk, hogy $ sp(AB) = sp(BA) $ ha $ A, B \in n \times n $-es mátrix. Ez elég menőőő. Habár A és B szorzata nem feltétlen kommutatív, a spektrumuk azonos. Tehát A sajátértékeik megegyeznek.
+👨‍🏫: Pontosan. A mátrixszorzás nem feltétlen kommutatív. A Jacobson-lemma miatt viszont beláthatjuk, hogy $ sp(AB) = sp(BA) $ ha $ A, B \in n \times n $-es mátrix. Ez elég menőőő. Habár A és B szorzata nem feltétlen kommutatív, a spektrumuk azonos. Tehát a sajátértékeik megegyeznek.
 Lássuk ezt be gyorsan:
 
 <ProofBox title="Bizonyítás: sp(AB) = sp(BA)">
@@ -312,3 +384,21 @@ $$
 \end{aligned}
 $$
 </ProofBox>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/* OTLETEK */}
+{/* todo ilyet majd csinalhatnek: https://ximera.osu.edu/la/LinearAlgebra/MAT-M-0023/main */}

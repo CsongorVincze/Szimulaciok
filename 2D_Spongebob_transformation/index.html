@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Spongebob Matrix Transformation</title>
+
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+        font-family: sans-serif;
+      }
+      canvas {
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        border: 2px solid #333;
+      }
+      #controls {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      .control-group {
+        margin-bottom: 10px;
+      }
+      label {
+        display: inline-block;
+        width: 30px;
+        font-weight: bold;
+      }
+      .values-display {
+        font-family: monospace;
+        margin-top: 10px;
+        font-size: 1.1em;
+      }
+    </style>
+
+    <script src="libraries/p5.min.js"></script>
+    <!-- <script src="libraries/p5.sound.min.js"></script> -->
+  </head>
+
+  <body>
+    <div id="controls">
+      <h3>Transformation Matrix</h3>
+      <div class="control-group">
+        <label for="sliderA">a:</label> <input type="range" id="sliderA" min="-2" max="2" step="0.1" value="1">
+      </div>
+      <div class="control-group">
+        <label for="sliderB">b:</label> <input type="range" id="sliderB" min="-2" max="2" step="0.1" value="0">
+      </div>
+      <div class="control-group">
+        <label for="sliderC">c:</label> <input type="range" id="sliderC" min="-2" max="2" step="0.1" value="0">
+      </div>
+      <div class="control-group">
+        <label for="sliderD">d:</label> <input type="range" id="sliderD" min="-2" max="2" step="0.1" value="1">
+      </div>
+      <div class="control-group">
+        <button id="btnRandom">Randomize</button>
+        <button id="btnReset">Reset (Identity)</button>
+      </div>
+      <div class="control-group">
+        <label for="checkAuto">Auto-play</label>
+        <input type="checkbox" id="checkAuto">
+      </div>
+      <div class="values-display" id="matrixValues">
+        [[ 1.0, 0.0 ],<br>
+         [ 0.0, 1.0 ]]
+      </div>
+    </div>
+    <script src="sketch.js"></script>
+  </body>
+</html>
