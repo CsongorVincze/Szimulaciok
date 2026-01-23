@@ -115,14 +115,16 @@ Szóban: az $(u_i)_{i\in I}$ vektorrendszer elemei akkor és csak akkor lineári
    a=(0,1),\qquad b=(1,1).
    $$
 
-## Bázis
+## Bázis, dimenzio
 
 Egy $V$ vektortérben az $(u_i)_{i\in I}$ vektorrendszer bázis, ha
 1. $(u_i)_{i\in I}$ lineárisan független,
 2. minden $x\in V$ előállítható az $(u_i)_{i\in I}$ lineáris kombinációjaként, azaz $\operatorname{span}\{u_i:i\in I\}=V$.
-{/*todo na ezt en nem igy irtam */}
 
 **Állítás**: Minden vektortérben van bázis.
+{/*todo na ezt en nem igy irtam, es kiegesziteni */}
+
+👨‍🏫: Egy vektorter dimenzioja a vektorterben levo bazisok szamossaga. Tehat peldaul.: $ dim(\mathbb{R}^{3}) = 3 $
 
 ## Linearis alter, linearis burok
 
@@ -159,7 +161,7 @@ $$
 
 🙋‍♂️: Ez a burok linaris burok dolog igazabol linearis alteret konstrual, nem?
 
-👨‍🏫: Igen. Ha osszeadod ket linearis kombinaciojat a vektorrendeszernek akkor az meg mindig a vektrorrendszered linearis kombinacioja lesz. Ugyanez igaz a szorzasra is. Tehat valoban, a linaris burok elkeszitese egy olyan "gepezet" ami a vektorrendszerunkre illeszt egy linaris alteret. De meg az is igaz hogy a leheto legkisebb linaris alteret illeszti az eredeti vektorainkra.
+👨‍🏫: Igen. Ha osszeadod ket linearis kombinaciojat a vektorrendeszernek akkor az meg mindig a vektrorrendszered linearis kombinacioja lesz. Ugyanez igaz a szorzasra is. Tehat valoban, a linaris burok elkeszitese egy olyan "gepezet" ami a vektorrendszerunkre illeszt egy linaris alteret. De meg az is igaz hogy a leheto legkisebb linaris alteret illeszti az eredeti vektorainkra. Ezt ertheted ugy, hogy ha van a 3D-s terben ket vektorod akkor azoknak a linaris burka egy sikot fog meghatarozni nem pedig az egesz 3D-s teret.
 
 
 
@@ -199,8 +201,36 @@ $ \langle f, g \rangle = \int_{0}^{1}f(x)g(x) \, dx $
 ha lecsekkolod a fent említett kritériumokat rájössz, hogy ez egy valid skaláris szorzás ezen a vektortéren.
 {/* todo ezt itt lehet levezethetnem */}
 
+### Normak
+
+👨‍🏫: Ahhogy a skalarszorzast is altalanositanunk kellett ha kicsit elborultabb vektorterekkel dolgoztunk, igy a vektorok hosszat sem olyan konnyu mar lemerjuk. Hasonloan itt is be fogunk vezetni egyes axiomakat. Es inkabb a norma szot fogjuk hasznalni a hossz helyett. Ha visszagondolsz a skalarszorzat axiomaira, milyen felteteleket kene szabjunk, hogy altalanosithassuk a vektor hosszat?
+
+🙋‍♂️: Szerintem itt is hasznos lenne ha nem engednenk meg hogy egy vektor negativ hosszu legyen. Meg hogyha a vektort megszorozzuk 5-tel akkor a normaja is lehetne 5-szor akkora.
+
+👨‍🏫: Jo otlet! Meg egy kicsit kiegeszitem es mar meg is van a norma definicioja.
+$$
+\begin{aligned}
+\|\cdot\| : V \to \mathbb{R} \\
+1. \quad & \|x\| \ge 0 \\
+2. \quad & \|x\| = 0 \iff x = 0 \\
+3. \quad & \|\lambda x\| = |\lambda| \|x\| \\
+4. \quad & \|x + y\| \le \|x\| + \|y\|
+\end{aligned}
+$$
+
+Szoval a norma egy olyan fuggveny ami a vektorterbol kepez a valos szamokba. Es valoban, a norma mindig nagyobb mint 0 kiveve ha magat a 0 vektort normaljuk. Abban is igazad volt, hogy ki kell tudjuk hozni a skalar szorzot. Itt annyi pontositast tettem hogy a skalar abszoluterteket kell tudjuk kiemelni. Ez azert kell mert lehet, hogy a  komplex kest folott van definialva a vektorterunk. Amit viszont elfelejtettel emliteni az a haromszogegyenlotlenseg. Ha van kedved leellenorizheted, hogy a sikon hasznalt standard norma kielegiti a normara adott felteteleinket. ( $ \|x\| = \sqrt{x_1^{2} + x_2^{2}} $ )
+
+🙋‍♂️: Hmmm... A normaban es a skalarszorzasban latszolag eleg sok kozos tulajdonsag van. Nem tudjuk valahogy oket osszekotni?
+
+👨‍🏫: Jo meglatas. Pont ezzel fogjuk folytatni. Ha van egy skalarszorzatos vektorterunk akkor abban a skalarszorzas normat indukal.:
+$$
+\|x\| = \sqrt{\langle x, x \rangle}
+$$
+
 <div id="p-norm-container" style={{display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '2rem 0'}}></div>
 <script is:inline src="/p_norm_sim.js"></script>
+
+
 
 
 
