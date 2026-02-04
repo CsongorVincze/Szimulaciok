@@ -583,7 +583,7 @@ $$
 A(e_i) = \gamma_{1,i} f_1 + \gamma_{2,i} f_2 + \dots +\gamma_{m,i} f_m 
 $$
 
-👨‍🏫: Kiraly. Mos lazan fogalmazva fogok csinalni egy tablazatot. Fogom minden $i$-re az altalad felirt kepleter $A(e_i)$-nek. Es a $\gamma$-s egyutthatokat berendezem egymas ala egy oszlopba. Most nem torodok az osszeadassal, es azzal sem hogy ott vannak az $f_j$ vektorok. Szimplan csinalok a $\gamma$ egyutthatokbol egy oszlopvektort, es ezt megcsinalom minden $i$-re, aztan az oszlopvektoraimat egymas melle teszem. Igy valami ilyesmit kapok.:
+👨‍🏫: Kiraly. Most lazan fogalmazva fogok csinalni egy tablazatot. Fogom minden $i$-re az altalad felirt kepletet $A(e_i)$-nek. Es a $\gamma$-s egyutthatokat berendezem egymas ala egy oszlopba. Most nem torodok az osszeadassal, es azzal sem hogy ott vannak az $f_j$ vektorok. Szimplan csinalok a $\gamma$ egyutthatokbol egy oszlopvektort, es ezt megcsinalom minden $i$-re, aztan az oszlopvektoraimat egymas melle teszem. Igy valami ilyesmit kapok.:
 
 $$
 \begin{aligned}
@@ -616,6 +616,77 @@ A_{m,1} & A_{m,2} & \dots & A_{m,n}
 $$
 
 Igy megalkottuk Az $A$ linearis lekepezes matrixat. A $[\space]$ jeloli, hogy ez mar egy matrix.
+
+🙋‍♂️: Szoval most onkenyesen csinaltunk egy tablazatot abbol, hogy az $U$-ban levo bazisokkal mit csinal a linearis lekpezes. Miert jo ez nekunk, es miert pont igy rendeztuk el a tablazatunkat.
+
+👨‍🏫: Igen ez igy elsore talan nem egyertelmu. A rovid valasz az, hogy ha majd vlamilyen manipulaciokat vegzunk az $A$ linearis lekepezessel (pl.: meg akarjuk nezni hogy mi tortenik ha ket lin. lekepezest hattatunk kompoziciokent) akkor ez a megfeleltetes lesz kenyelmes, igy fognak szepen kijonni a dolgok. Azt is szoktak mondani, hogy a 
+
+{/* todo itt ird le az izomorfizmust a lin lekepezes es a matrixok kozott: https://www.youtube.com/watch?v=jtXEMAXvLr4  + az ilyen kanonikus dolgok is kellenek.*/}
+
+👨‍🏫: Meg annyit erdemes megemliteni, hogy igazabol amit csinaltunk az annyi volt, hogy felhasznaltuk, hogy $U$ izomorf $\mathbb{K}^n$ -el es $V$ izomorf $\mathbb{K}^m$ -el. Tehat Valasztunk $U$ -ban es $V$ -ben is egy-egy bazist. Igy mukodik az izomorfizmus tehat vehetjuk ugy is, hogy 
+{/* todo ez itt nagyon rossz */}
+
+
+## Muveletek matrixokkal
+
+
+<div id="spongebob-matrix-container" style={{display: 'flex', justifyContent: 'center', margin: '2rem 0', minHeight: '600px'}}></div>
+<script is:inline src="/spongebob_matrix_sim.js"></script>
+
+
+### 3D Transzformáció (Bónusz)
+Próbáld ki a transzformációkat 3D-ben is Spongyabobon!
+[Kattints ide a 3D szimuláció megtekintéséhez](/spongebob_3d)
+
+### Osszeadas, skalarral szorzas
+
+👨‍🏫: Menjunk tovabb, es nezegessuk meg, hogy milyen muveleteket tudunk vegrehajtani linearis lekepzesek matrixaval. Eloszor nezzuk meg ket matrix osszeadasat es skalarral valo szorzasat. Van otleted hogy, hogyan adunk ossze ket matrixot? 
+
+🙋‍♂️: Szamomra az lenne az intuitiv, ha elemenkent osszeadnank. Szorzasnal pedik minden elemet megszoroznank a kivant sakalarral.
+
+👨‍🏫: Jo otlet. Valoban igy definialjuk matrixok osszeadasat es skalarral valo szorzasat. Egy dologra azert megis figyelnunk kell az osszeadasnal. Mi lehet ez?
+
+<Question
+  question="Mire kell figyeljunk matrixok osszeadasanal?"
+  options={[
+    "Az osszeadas csak a valos matrixokon ertelmezett",
+    "Ez egy becsapos kerdes, akarmilyen matrixot ossze lehet adni",
+    "Legyen a ket matrix alakja ugyan olyan (n x m -es) ",
+    "Mindket linearis lekepezes (amikbol kepeztuk a matrixokat) ugyanabbol az U vt.-bol kepezzen ugyanabba a V vt.-be"
+  ]}
+  correctAnswerIndex={3}
+/>
+
+🙋‍♂️: Miert nem eleg, hogy ha ugyanolyan a ket matrix alakja. Ekkor ossze tudom oket adni, nem?
+
+👨‍🏫: Igen, formalisan ossze lehet oket adni, de ha arra gondolsz hogy hogyan definialtuk a linearis lekepezesek osszeadasat akkor vilagossa valik a dolog. $ (A + B)(v) =  A(v) + B(v) $ Ha az $A$ es a $B$ lin. lekepezes mas vektorterbe kepez akkor $ A(v) + B(v) $ nem definialt. Na meg persze ha a lin. lekepezesek ertekkeszletekent szolgalo vektorterek is masak akkor meg nehezen tudjak a lin. lekepezesek "megenni" ugyanazt a $V$ vektort. Kicsit olyan ez mintha az 5 m/s-ot szeretned lehuteni. Vagy ossze akarnal adni 6kg-ot 4 oraval. Nincs igazan ertleme a dolognak.
+{/* todo itt azert note h. programozasnal mi tortenik matrixok osszeadasakor */}
+
+👨‍🏫: Tehat ha van $ A, B : U \rightarrow V $ lin. lekepezesunk es $ \lambda \in \mathbb{K} $ skalarunk akkor a kovetkezok igazak, $A$ es $B$ matrixaira:
+
+$$
+([A] + [B])_{ij} = [A]_{ij} + [B]_{ij}\\
+\quad\\
+(\lambda [A])_{ij} = \lambda [A]_{ij}
+$$
+
+Tehat valoban komponensenkent vegezzuk el a matrixok osszeadasat es skalarral valo szorzasat.
+
+### Matrixok szorzasa
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

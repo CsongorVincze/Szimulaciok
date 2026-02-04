@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>3D Spongebob Matrix Transformation</title>
+
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #1a1a1a; /* Darker background for 3D feel */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #eee;
+      }
+      canvas {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        border: 1px solid #444;
+      }
+      #controls {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(30, 30, 30, 0.9);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        backdrop-filter: blur(10px);
+        max-height: 90vh;
+        overflow-y: auto;
+        min-width: 250px;
+      }
+      h3 {
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-weight: 600;
+        color: #ffeb3b; /* Spongebob yellow accent */
+        text-align: center;
+      }
+      .matrix-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin-bottom: 15px;
+        background: #2a2a2a;
+        padding: 10px;
+        border-radius: 8px;
+      }
+      .matrix-cell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .matrix-cell label {
+        font-size: 0.8em;
+        margin-bottom: 2px;
+        color: #aaa;
+      }
+      input[type="range"] {
+        width: 100%;
+        accent-color: #ffeb3b;
+      }
+      .control-group {
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      button {
+        background-color: #444;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.2s;
+        flex: 1;
+        margin: 0 5px;
+      }
+      button:hover {
+        background-color: #666;
+      }
+      button#btnReset {
+        background-color: #d32f2f;
+      }
+      button#btnReset:hover {
+        background-color: #b71c1c;
+      }
+      .values-display {
+        font-family: 'Consolas', monospace;
+        background: #000;
+        padding: 10px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        line-height: 1.4;
+        color: #4caf50;
+      }
+    </style>
+
+    <script src="libraries/p5.min.js"></script>
+    <!-- <script src="libraries/p5.sound.min.js"></script> -->
+  </head>
+
+  <body>
+    <div id="controls">
+      <h3>3D Transformation</h3>
+      
+      <div class="matrix-grid">
+        <!-- Row 1 -->
+        <div class="matrix-cell"><label>m00</label><input type="range" id="m00" min="-2" max="2" step="0.1" value="1"></div>
+        <div class="matrix-cell"><label>m01</label><input type="range" id="m01" min="-2" max="2" step="0.1" value="0"></div>
+        <div class="matrix-cell"><label>m02</label><input type="range" id="m02" min="-2" max="2" step="0.1" value="0"></div>
+        
+        <!-- Row 2 -->
+        <div class="matrix-cell"><label>m10</label><input type="range" id="m10" min="-2" max="2" step="0.1" value="0"></div>
+        <div class="matrix-cell"><label>m11</label><input type="range" id="m11" min="-2" max="2" step="0.1" value="1"></div>
+        <div class="matrix-cell"><label>m12</label><input type="range" id="m12" min="-2" max="2" step="0.1" value="0"></div>
+        
+        <!-- Row 3 -->
+        <div class="matrix-cell"><label>m20</label><input type="range" id="m20" min="-2" max="2" step="0.1" value="0"></div>
+        <div class="matrix-cell"><label>m21</label><input type="range" id="m21" min="-2" max="2" step="0.1" value="0"></div>
+        <div class="matrix-cell"><label>m22</label><input type="range" id="m22" min="-2" max="2" step="0.1" value="1"></div>
+      </div>
+
+      <div class="control-group">
+        <button id="btnRandom">Randomize</button>
+        <button id="btnReset">Reset</button>
+      </div>
+      
+      <div class="control-group">
+        <label for="checkAuto">Auto-animate</label>
+        <input type="checkbox" id="checkAuto">
+      </div>
+      
+      <div class="values-display" id="matrixValues">
+        <!-- Matrix values will appear here -->
+      </div>
+    </div>
+    <script src="sketch.js"></script>
+  </body>
+</html>

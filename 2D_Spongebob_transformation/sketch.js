@@ -4,6 +4,12 @@ let sliderA, sliderB, sliderC, sliderD;
 let btnRandom, btnReset, checkAuto;
 let matrixValuesDisplay;
 
+// Smoothed values for the transformation matrix
+let smoothedA = 1;
+let smoothedB = 0;
+let smoothedC = 0;
+let smoothedD = 1;
+
 
 
 function setup() {
@@ -39,6 +45,12 @@ function setup() {
             imgState = 'error';
         }
     );
+
+    // Initialize smoothed values to the current slider values
+    smoothedA = float(sliderA.value());
+    smoothedB = float(sliderB.value());
+    smoothedC = float(sliderC.value());
+    smoothedD = float(sliderD.value());
 }
 
 function draw() {
@@ -63,13 +75,21 @@ function draw() {
     }
 
     // Get values
-    let a = float(sliderA.value());
-    let b = float(sliderB.value());
-    let c = float(sliderC.value());
-    let d = float(sliderD.value());
+    // Get target values from sliders
+    let targetA = float(sliderA.value());
+    let targetB = float(sliderB.value());
+    let targetC = float(sliderC.value());
+    let targetD = float(sliderD.value());
 
-    // Update display
-    matrixValuesDisplay.html(`[[ ${a.toFixed(2)}, ${c.toFixed(2)} ],<br> [ ${b.toFixed(2)}, ${d.toFixed(2)} ]]`);
+    // Smoothly interpolate current values towards target values
+    let lerpAmt = 0.1;
+    smoothedA = lerp(smoothedA, targetA, lerpAmt);
+    smoothedB = lerp(smoothedB, targetB, lerpAmt);
+    smoothedC = lerp(smoothedC, targetC, lerpAmt);
+    smoothedD = lerp(smoothedD, targetD, lerpAmt);
+
+    // Update display with smoothed values
+    matrixValuesDisplay.html(`[[ ${smoothedA.toFixed(2)}, ${smoothedC.toFixed(2)} ],<br> [ ${smoothedB.toFixed(2)}, ${smoothedD.toFixed(2)} ]]`);
 
     push();
     translate(width / 2, height / 2);
@@ -87,7 +107,7 @@ function draw() {
     // y' = b*x + d*y + f
     // So a=scaleX, b=skewY, c=skewX, d=scaleY
 
-    applyMatrix(a, b, c, d, 0, 0);
+    applyMatrix(smoothedA, smoothedB, smoothedC, smoothedD, 0, 0);
 
     // Draw grid for reference
     stroke(200, 0, 0, 100);
