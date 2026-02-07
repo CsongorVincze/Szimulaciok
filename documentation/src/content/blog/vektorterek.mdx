@@ -9,8 +9,11 @@ tags: ['math', 'linear-algebra', 'vectors']
 import Question from '../../components/Question.astro';
 import ProofBox from '../../components/ProofBox.astro';
 import AxiomBox from '../../components/AxiomBox.astro';
+import Exercise from '../../components/Exercise.astro';
 
 ## Vektorterek
+
+{/* todo ilyenre lehetne megcsinalni az egyes felyezeteket: https://bruno-simon.com/ */}
 
 👨‍🏫: Elerkeztunk egy ujabb fontos reszhez. Mit tanultatok a kozepiskolaban a vektorokrol?
 
@@ -52,7 +55,7 @@ $$
 1. \quad & u+(v+w)=(u+v)+w && (\text{asszociatív}) \\
 2. \quad & u+v=v+u && (\text{kommutatív}) \\
 3. \quad & \exists\,0\in V \text{ olyan, hogy } 0+v=v \quad \forall v\in V \text{ esetén} && (\text{nullvektor}) \\
-4. \quad & \forall v\in V\text{-hez } \exists -v\in V \text{ úgy, hogy } v+(-v)=0 && (\text{ellenkező elem})
+4. \quad & \forall v\in V \text{ esetén } \exists -v\in V \text{ úgy, hogy } v+(-v)=0 && (\text{ellentett})
 \end{aligned}
 $$
 
@@ -65,10 +68,11 @@ $$
 A következő axiómák teljesülnek:
 $$
 \begin{aligned}
-1. \quad & \lambda(\mu v)=(\lambda\mu)v && (\text{ez nem pont asszociativitás de hasonló}) \\
+1. \quad & \lambda(\mu v)=(\lambda\mu)v && (\text{skalárasszociativitás_legalabbis_olyasmi}) \\ 
+
 2. \quad & \exists\,1\in K \text{ úgy, hogy } 1\cdot v = v \quad \forall v\in V \text{ esetén} && \\
-3. \quad & (\lambda+\mu)v=\lambda v + \mu v && (\text{disztributivitás a skalárok összeadására}) \\
-4. \quad & \lambda(v+u)=\lambda v + \lambda u && (\text{disztributivitás a vektorok összeadására})
+3. \quad & (\lambda+\mu)v=\lambda v + \mu v && (\text{disztributivitás_a_skalárok_összeadására}) \\
+4. \quad & \lambda(v+u)=\lambda v + \lambda u && (\text{disztributivitás_a_vektorok_összeadására})
 \end{aligned}
 $$
 
@@ -674,27 +678,113 @@ Tehat valoban komponensenkent vegezzuk el a matrixok osszeadasat es skalarral va
 
 ### Matrixok szorzasa
 
+👨‍🏫: Szerinted, hogy kell ket matrixot osszeszorozni?
+
+🙋‍♂️: Hat gondolom az elso matrix $(i,j)$-ik elemet osszeszorzom a masodik matrix $(i,j)$ elemevel es ez lesz az uj matrix erteke az $(i,j)$-ik helyen.
+
+👨‍🏫: Igen ez nem egy rossz gondolat, de nem igy definialjuk a matrixszorzast. Ket matrix szorzatat a hozzajuk tartozo linearis lekepezesek kompoziciojanak matrixakent definialunk. Ez igy eslore bonyolultnak tunhet, de nezzuk meg a bizonyitast!
+
+{/* 👨‍🏫: Jogos a kérdés! De emlékezz vissza, hogyan definiáltuk a mátrixot. A mátrix a lineáris leképezés reprezentációja egy adott bázisban. Ha két mátrixot összeszorzunk, az valójában két lineáris leképezés **kompozíciójának** (egymásutánjának) felel meg. Nézzük meg, hogy matematikailag mi történik, ha egy $u$ vektort először átküldünk a $B$ leképezésen, majd az eredményt az $A$ leképezésen! */}
+
+<ProofBox title="Mátrixszorzás származtatása">
+
+Legyenek adottak a következő terek és bázisok:
+$U: u_1, \dots, u_n$
+$V: v_1, \dots, v_m$
+$W: w_1, \dots, w_l$
+
+És a leképezések:
+$B: U \to V$
+$A: V \to W$
+
+A célunk meghatározni az $(A \circ B)$ kompozíció mátrixát.
+Induljunk ki egy tetszőleges $x \in U$ vektorból:
+$$
+x = \sum_{i=1}^n x_i u_i
+$$
+
+Hassunk rá a kompozícióval:
+$$
+\begin{aligned}
+(A \circ B)(x) &= A(B(x)) \\
+&= A\left( B\left( \sum_{i=1}^n x_i u_i \right) \right)
+\end{aligned}
+$$
+
+Használjuk ki a $B$ linearitását:
+$$
+A\left( \sum_{i=1}^n x_i B(u_i) \right)
+$$
+
+Tudjuk, hogy $B(u_i)$ kifejezhető a $V$ bázisvektoraival (ez a $B$ mátrixának definíciója):
+$B(u_i) = \sum_{j=1}^m B_{ji} v_j$
+
+Helyettesítsük be:
+$$
+A\left( \sum_{i=1}^n x_i \left[ \sum_{j=1}^m B_{ji} v_j \right] \right)
+$$
+
+Most használjuk ki az $A$ linearitását:
+$$
+\sum_{i=1}^n x_i \sum_{j=1}^m B_{ji} A(v_j)
+$$
+
+Végül fejtsük ki $A(v_j)$-t a $W$ bázisvektoraival:
+$A(v_j) = \sum_{k=1}^l A_{kj} w_k$
+
+$$
+\sum_{i=1}^n x_i \sum_{j=1}^m B_{ji} \left( \sum_{k=1}^l A_{kj} w_k \right)
+$$
+
+Rendezzük át az összegeket, hogy lássuk az új, kompozícióhoz tartozó mátrixot (ami $x_i$-ből csinál együtthatót $w_k$-hoz):
+$$
+\sum_{i=1}^n x_i \sum_{k=1}^l \underbrace{\left( \sum_{j=1}^m A_{kj} B_{ji} \right)}_{ (AB)_{ki} } w_k
+$$
+
+</ProofBox>
+
+👨‍🏫: Látod a zárójeles részt? $\sum_{j=1}^m A_{kj} B_{ji}$. Ez pontosan azt jelenti, hogy az eredmény ($AB$) mátrix $k$-adik sorának és $i$-edik oszlopának metszéspontjában lévő elemét úgy kapjuk, hogy az $A$ $k$-adik sorát skalárisan szorozzuk a $B$ $i$-edik oszlopával. Innen jön a "sor-szor-oszlop" szabály!
+{/* todo ezt is atnezni */}
+
+👨‍🏫: Na nezzunk meg erre egy kezzel foghato peldat!
+
+$$
+\begin{bmatrix}
+1 & 2 \\
+3 & 4
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix}
+= ?
+$$
+
+<Exercise
+  problem="Számold ki a fenti mátrixszorzás eredményét!"
+  solution={[[2, 1], [4, 3]]}
+/>
+
+Na nezzunk meg meg egy matrixot!
+
+$$
+\begin{bmatrix}
+1 & 5 \\
+7 & 9 \\
+3 & 1
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+-3 & 4
+0 & -2
+$$
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<Exercise
+  problem="Számold ki a fenti mátrixszorzás eredményét!"
+  solution={[[2, 1], [4, 3], [5, 5]]}
+/>
 
 
 

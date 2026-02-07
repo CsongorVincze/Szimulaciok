@@ -169,53 +169,78 @@ const graphData = { nodes: processedNodes, links };
         .graphData(graphData)
         .nodeLabel('name')
         .nodeColor(node => node.type === 'main' ? '#a78bfa' : '#c084fc')
-        .nodeVal('val')
+        .nodeVal(node => node.type === 'main' ? 5 : 2) // Original values
+        .nodeRelSize(6) // Slightly larger relative size for hit detection but visually smaller
         .linkColor(() => '#ffffff50')
         .linkDirectionalArrowLength(3.5)
         .linkDirectionalArrowRelPos(1)
         .backgroundColor('#00000000')
-        // Initial sizes
         .width(elem.offsetWidth)
         .height(elem.offsetHeight)
+        .enableNodeDrag(true)
+        .onNodeHover(node => {
+          if (node) {
+            elem.style.cursor = 'pointer';
+          } else {
+            elem.style.cursor = 'grab';
+          }
+        })
         .onNodeClick(node => {
           if (isFullscreen) {
-             toggleFullscreen(); // Exit FS on click to navigate
+             toggleFullscreen();
           }
           const element = document.getElementById(node.id);
           if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
           }
         })
+        .nodeCanvasObjectMode(() => 'after')
         .nodeCanvasObject((node, ctx, globalScale) => {
           const label = node.name;
-          const scaleMultiplier = isFullscreen ? 2.5 : 1; // Scale up in fullscreen
-          const fontSize = (14 * scaleMultiplier)/globalScale;
-          ctx.font = `${fontSize}px Sans-Serif`;
-          const textWidth = ctx.measureText(label).width;
-          const bckgDimensions = [textWidth, fontSize].map(n => n + fontSize * 0.2);
-
-          ctx.fillStyle = 'rgba(255, 255, 255, 0.0)';
+          const scaleMultiplier = isFullscreen ? 1.5 : 1.0; 
+          const fontSize = 14 * scaleMultiplier; 
           
-          ctx.beginPath();
-          const r = Math.sqrt(node.val) * 2 * scaleMultiplier;
-          ctx.fillStyle = node.type === 'main' ? '#a78bfa' : '#c084fc';
-          ctx.arc(node.x, node.y, r, 0, 2 * Math.PI, false);
-          ctx.fill();
+          ctx.font = `600 ${fontSize}px "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`;
+          const textWidth = ctx.measureText(label).width;
+          const padding = fontSize * 0.5;
+          
+          // Visual radius purely for text positioning
+          // The actual node circle is drawn by the library now
+          const baseRadius = node.type === 'main' ? 5 : 3; // Reverted visual sizes
+          const r = Math.sqrt(node.val) * 2 * scaleMultiplier; // Approximate visual match
+          const textY = node.y + r + fontSize * 0.7;
 
+          // Draw background for text
+          const w = textWidth + padding * 2;
+          const h = fontSize + padding;
+          
+          ctx.fillStyle = 'rgba(15, 15, 25, 0.85)';
+          ctx.beginPath();
+          const rx = node.x - w / 2;
+          const ry = textY - h / 2;
+          if (ctx.roundRect) {
+            ctx.roundRect(rx, ry, w, h, 4);
+          } else {
+            ctx.rect(rx, ry, w, h);
+          }
+          ctx.fill();
+          
+          ctx.strokeStyle = 'rgba(167, 139, 250, 0.3)';
+          ctx.lineWidth = 1; 
+          ctx.stroke();
+
+          // Draw Text
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
-          ctx.fillStyle = '#fff';
-          ctx.fillText(label, node.x, node.y + r + fontSize);
-
-          node.__bckgDimensions = bckgDimensions;
-        })
-        .nodePointerAreaPaint((node, color, ctx) => {
-            const scaleMultiplier = isFullscreen ? 2.5 : 1;
-            const r = Math.sqrt(node.val) * 2 * scaleMultiplier;
-            ctx.fillStyle = color;
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, r, 0, 2 * Math.PI, false);
-            ctx.fill();
+          
+          if (globalScale > 0.6) {
+             ctx.strokeStyle = 'rgba(0, 0, 0, 0.8)';
+             ctx.lineWidth = 2.5;
+             ctx.strokeText(label, node.x, textY);
+          }
+          
+          ctx.fillStyle = '#ffffff';
+          ctx.fillText(label, node.x, textY);
         });
         
       Graph.d3Force('charge').strength(-300);

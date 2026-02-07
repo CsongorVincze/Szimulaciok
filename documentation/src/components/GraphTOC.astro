@@ -83,34 +83,51 @@ const graphData = { nodes, links };
     .nodeCanvasObject((node, ctx, globalScale) => {
       const label = node.name;
       const fontSize = 12/globalScale;
-      ctx.font = `${fontSize}px Sans-Serif`;
+      ctx.font = `${fontSize}px "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`;
       const textWidth = ctx.measureText(label).width;
-      const bckgDimensions = [textWidth, fontSize].map(n => n + fontSize * 0.2); // some padding
+      const bckgDimensions = [textWidth, fontSize].map(n => n + fontSize * 0.5); 
 
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.0)'; // Transparent background for text
-      
-      // Draw circle
-      ctx.beginPath();
       const r = Math.sqrt(node.val) * 2;
-        ctx.fillStyle = node.type === 'post' ? '#646cff' : '#42b883'; // Astro colors roughly
-        if(node.type === 'post') {
-             ctx.arc(node.x, node.y, r, 0, 2 * Math.PI, false);
-             ctx.fill();
-        } else {
+      const textYOffset = r + fontSize; 
+      const textY = node.y + textYOffset;
+
+      // Draw background
+      const w = bckgDimensions[0];
+      const h = bckgDimensions[1];
+      ctx.fillStyle = 'rgba(10, 10, 15, 0.8)';
+      
+      const rx = node.x - w / 2;
+      const ry = textY - h / 2;
+
+      ctx.beginPath();
+      if (ctx.roundRect) {
+         ctx.roundRect(rx, ry, w, h, 4/globalScale);
+      } else {
+         ctx.rect(rx, ry, w, h);
+      }
+      ctx.fill();
+
+      // Draw Node
+      ctx.beginPath();
+      // Keep original rendering logic
+      if(node.type === 'post') {
+            ctx.fillStyle = '#646cff';
+            ctx.arc(node.x, node.y, r, 0, 2 * Math.PI, false);
+            ctx.fill();
+      } else {
             ctx.fillStyle = '#888888';
             ctx.arc(node.x, node.y, r/1.5, 0, 2 * Math.PI, false);
             ctx.fill();
-        }
-
+      }
 
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = node.type === 'post' ? '#fff' : '#ddd';
       
-      // Show label below the node
-      ctx.fillText(label, node.x, node.y + r + fontSize);
+      ctx.fillText(label, node.x, textY);
 
-      node.__bckgDimensions = bckgDimensions; // to re-use in nodePointerAreaPaint
+      node.__bckgDimensions = bckgDimensions; 
+      node.__textYOffset = textYOffset;
     })
     .nodePointerAreaPaint((node, color, ctx) => {
         const r = Math.sqrt(node.val) * 2;
@@ -118,6 +135,15 @@ const graphData = { nodes, links };
         ctx.beginPath();
         ctx.arc(node.x, node.y, r, 0, 2 * Math.PI, false);
         ctx.fill();
+        
+        if (node.__bckgDimensions && node.__textYOffset) {
+             const w = node.__bckgDimensions[0];
+             const h = node.__bckgDimensions[1];
+             const textY = node.y + node.__textYOffset;
+             ctx.beginPath();
+             ctx.rect(node.x - w / 2, textY - h / 2, w, h);
+             ctx.fill(); 
+        }
     });
 
     // Fit to canvas

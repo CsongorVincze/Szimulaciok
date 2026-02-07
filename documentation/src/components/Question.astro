@@ -25,6 +25,7 @@ const { question, options, correctAnswerIndex } = Astro.props;
   </div>
   
   <div class="feedback-message hidden"></div>
+  <button class="retry-btn hidden">Próbáld újra</button>
 </div>
 
 <style>
@@ -40,6 +41,8 @@ const { question, options, correctAnswerIndex } = Astro.props;
       0 10px 15px -3px rgba(29, 53, 87, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     font-family: system-ui, -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
   }
 
   .quiz-container:hover {
@@ -213,6 +216,28 @@ const { question, options, correctAnswerIndex } = Astro.props;
     border: 1px solid var(--punch-red);
   }
 
+  .retry-btn {
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--punch-red);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    align-self: center;
+    transition: opacity 0.3s, transform 0.2s;
+  }
+
+  .retry-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .retry-btn.hidden {
+    display: none;
+  }
+
   @keyframes shake {
     10%, 90% { transform: translate3d(-1px, 0, 0); }
     20%, 80% { transform: translate3d(2px, 0, 0); }
@@ -253,6 +278,7 @@ const { question, options, correctAnswerIndex } = Astro.props;
     container: HTMLElement;
     buttons: NodeListOf<HTMLButtonElement>;
     feedback: HTMLElement;
+    retryBtn: HTMLButtonElement;
     correctIndex: number;
     answered: boolean = false;
 
@@ -260,11 +286,16 @@ const { question, options, correctAnswerIndex } = Astro.props;
       this.container = el;
       this.buttons = el.querySelectorAll('.option-btn');
       this.feedback = el.querySelector('.feedback-message') as HTMLElement;
+      this.retryBtn = el.querySelector('.retry-btn') as HTMLButtonElement;
       this.correctIndex = parseInt(el.dataset.correctIndex || '0');
       
       this.buttons.forEach(btn => {
         btn.addEventListener('click', () => this.handleGuess(btn));
       });
+
+      if (this.retryBtn) {
+        this.retryBtn.addEventListener('click', () => this.reset());
+      }
     }
 
     handleGuess(btn: HTMLButtonElement) {
@@ -277,19 +308,31 @@ const { question, options, correctAnswerIndex } = Astro.props;
       // Disable all buttons
       this.buttons.forEach(b => {
         b.disabled = true;
-        // Optionally reveal the correct answer if they got it wrong
-        if (!isCorrect && parseInt(b.dataset.index || '0') === this.correctIndex) {
-             b.classList.add('correct'); // Reveal correct one
-        }
       });
 
       if (isCorrect) {
         btn.classList.add('correct');
-        this.showFeedback('Correct! Great job.', 'success');
+        this.showFeedback('Helyes válasz! Szép munka.', 'success');
         this.triggerConfetti(btn);
       } else {
         btn.classList.add('wrong');
-        this.showFeedback('Not quite. The correct answer is highlighted.', 'error');
+        this.showFeedback('Nem egészen. Próbáld újra!', 'error');
+        // Show retry button
+        if (this.retryBtn) {
+          this.retryBtn.classList.remove('hidden');
+        }
+      }
+    }
+
+    reset() {
+      this.answered = false;
+      this.buttons.forEach(b => {
+        b.disabled = false;
+        b.classList.remove('correct', 'wrong');
+      });
+      this.feedback.classList.add('hidden');
+      if (this.retryBtn) {
+        this.retryBtn.classList.add('hidden');
       }
     }
 
